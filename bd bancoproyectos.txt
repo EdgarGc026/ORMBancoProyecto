@@ -1,0 +1,67 @@
+Para crear la tabla projects:
+
+CREATE TABLE projects (
+  	project_id INT NOT NULL AUTO_INCREMENT,
+  	city_id INT NULL,
+  	company_id INT NULL,
+  	user_id INT NULL,
+  	name VARCHAR(30) NULL,
+  	execution_date DATE NULL,
+  	is_active TINYINT NULL,
+  	created_at DATETIME NULL,
+  	updated_at DATETIME NULL,
+  	PRIMARY KEY (project_id)
+);
+
+Crear la tabla users:
+
+CREATE TABLE users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NULL,
+  created_at DATETIME,
+  updated_at DATETIME,
+  PRIMARY KEY (user_id)
+);
+
+crear una tabla companies:
+
+CREATE TABLE companies (
+  company_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NULL,
+  created_at DATETIME,
+  updated_at DATETIME,
+  PRIMARY KEY (company_id));
+
+crear tabla cities:
+
+CREATE TABLE cities (
+  city_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NULL,
+  created_at DATETIME,
+  updated_at DATETIME,
+  PRIMARY KEY (city_id)
+);
+
+configurar llaves foraneas:
+
+ALTER TABLE projects ADD FOREIGN KEY (city_id) REFERENCES cities(city_id);
+ALTER TABLE projects ADD FOREIGN KEY (company_id) REFERENCES companies(company_id);
+ALTER TABLE projects ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+php artisan tinker:
+	>DB::connection()->getPdo();
+
+//Crear un modelo
+php artisan make:model nameModel
+
+//Insertar datos de manera manual
+INSERT INTO cities (name) VALUES ('Bogota');
+
+INSERT INTO companies (name) VALUES ('Empresa ABC');
+
+INSERT INTO users (name) VALUES ('Elmo');
+
+INSERT INTO projects (city_id, company_id, user_id, name, execution_date, is_active) VALUES ('1', '1', '1', 'Proyecto de test', '2020-04-30', '1');
+
+
+
